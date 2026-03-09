@@ -20,3 +20,19 @@ body{
     margin: 20px;
     border-radius: 4px;   
 }
+
+.Task-container{
+    padding: 40px;
+    margin: 3px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+.Task-container a{
+    padding: 10px;
+    margin: 2px;
+    border-radius: 6px;
+    background-color: #85d59d;
+    color: white;
+}
