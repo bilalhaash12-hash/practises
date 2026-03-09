@@ -6,9 +6,9 @@ body{
     color: #f8fafc;
 }
 .container {
-    width: 500px;
-    height: 100px;
-    background-color: rgb(31, 2, 2);
+    width: 90%;
+    height: 150px;
+    background-color: rgb(0, 0, 0);
     border: 2px solid black;
     padding: 20px;  
     margin: 40px;   
@@ -17,7 +17,7 @@ body{
     background: #3b82f6;
     color: white;
     padding: 20px;
-    margin: 20px;
+    margin: 40px;
     border-radius: 4px;   
 }
 
