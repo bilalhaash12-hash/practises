@@ -1,0 +1,32 @@
+body{
+    background-color:#fefefe;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family: Arial, sans-serif;
+}
+
+.card{
+    background:#24344a;
+    width:280px;
+    padding:20px;
+    border-radius:12px;
+}
+
+.image{
+    height:140px;
+    background:#5b6b7f;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+h2{
+    color:white;
+    margin:0;
+}
+
+p{
+    color:#a8b4c4;
+    margin-top:8px;
+}
