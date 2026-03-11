@@ -1,0 +1,15 @@
+body{
+    background-color:#132237;
+}
+.card{
+    width:100px;
+    padding:20px;
+    background:#132237;
+}
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px;
+    object-fit:cover;
+}
