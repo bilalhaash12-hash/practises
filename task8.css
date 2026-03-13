@@ -1,6 +1,10 @@
 body{
     background-color:#132237;
 }
+h2{
+    color: white;
+    text-decoration: underline;
+}
 .card{
     width:100px;
     padding:20px;

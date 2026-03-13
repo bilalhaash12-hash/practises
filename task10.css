@@ -1,6 +1,10 @@
 body{
     background-color: rgb(2, 24, 44);
 }
+h2{
+    color: white;
+    text-decoration: underline;
+}
 .container{
     display: flex;
     padding: 10px 15px;

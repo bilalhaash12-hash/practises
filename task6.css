@@ -3,6 +3,10 @@ body{
     border-radius: 7px;
     background-color:#09111e;
 }
+h2{
+    color: white;
+    text-decoration: underline;
+}
 
 .container{
     display: flex;

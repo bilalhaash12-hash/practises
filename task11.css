@@ -2,6 +2,10 @@ body{
     background-color: rgb(8, 4, 46);
     
 }
+h2{
+    color: white;
+    text-decoration: underline;
+}
 
 button{
     margin-top: 20px;
