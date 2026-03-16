@@ -1,6 +1,11 @@
 body{
     background-color: rgb(9, 40, 67);
 }
+h2{
+    color: white;
+    font-size: large;
+    text-decoration: underline;
+}
 .btn{
     color: white;
     background-color: gray;
