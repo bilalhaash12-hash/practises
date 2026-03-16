@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(7, 31, 52);
+}
+h2{
+    color: white;
+    text-decoration: underline;
+    font-size: large;
+    
+}
+.container{
+    margin:40px auto;
+    position:relative;
+    width: 90%;
+    height: 200px;
+    background-color: rgb(74, 75, 76);
+}
+.btn{
+   background:#187d94;
+   color:white;
+   border:none;
+   padding:12px 25px;
+   font-size:16px;
+   border-radius:6px;
+
+   position:absolute;
+   top:50%;
+   left:50%;
+   transform:translate(-50%,-50%);
+}

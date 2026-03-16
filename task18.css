@@ -1,0 +1,19 @@
+body{
+    background-color: rgb(9, 40, 67);
+}
+.btn{
+    color: white;
+    background-color: gray;
+    padding:10px 20px;
+    border-radius: 8px;
+}
+.btn::after{
+    content:"  →";
+    margin: right 10px;
+    display:inline-block;
+    transition:transform 0.3s;
+}
+
+.btn:hover::after{
+  transform:translateX(10px);
+}

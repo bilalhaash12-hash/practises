@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(4, 38, 68);
+}
+h2{
+    color: white;
+    text-decoration: underline;
+    font-size: large;
+}
+.gallery{
+  display:flex;
+  flex-wrap:wrap;      
+  gap:20px;
+  padding:20px;
+}
+
+.item{
+  width:120px;
+  height:120px;
+  background:  #9715ab;
+  border-radius:12px;
+}
