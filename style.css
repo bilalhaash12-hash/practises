@@ -24,3 +24,11 @@ h1{
     border:none;
     font-size:16px;
 }
+.Task-container a:hover{
+    background-color: #465704;
+    transform: translateY(-5px);
+    
+}
+.link{
+    text-decoration: none;
+}

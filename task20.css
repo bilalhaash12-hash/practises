@@ -1,0 +1,18 @@
+body{
+    background-color: rgb(2, 20, 35);
+}
+h2{
+    color: white;
+    text-decoration: underline;
+    font-size: large;
+}
+
+.gradient-text{
+    font-size: 60px;
+    font-weight: bold;
+    background: linear-gradient(90deg,orange, pink, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}

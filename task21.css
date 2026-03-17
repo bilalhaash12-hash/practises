@@ -1,0 +1,39 @@
+body{
+    background-color: #021123;
+}
+h2{
+    color: white;
+    text-decoration: underline;
+    font-size: large;
+}
+p{
+    font-size: large;
+}
+.scroll{
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 200px;
+    height: 150px;
+    overflow-y: auto;
+    background: #1e2a3a;
+    padding: 5px;
+    color: #cbd5e1;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: #6b7a90; 
+  border-radius: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #6b7a90 transparent;
+}
