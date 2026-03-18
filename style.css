@@ -5,6 +5,7 @@ h1{
     text-align: center;
     color: white;
     text-decoration: underline;
+    font-size: large;
 }
 .Task-container{
     display: flex;
@@ -26,7 +27,7 @@ h1{
 }
 .Task-container a:hover{
     background-color: #465704;
-    transform: translateY(-5px);
+    transform: translateY(-5px);   
     
 }
 .link{
