@@ -151,7 +151,8 @@ p{
     text-decoration: none;
     margin-left: 20px;
     transition: 0.3s;
+    padding: 10px 15px;
 }
 .foot-links a:hover{
-    background-color: #060c5f;
+    color: #060c5f;
 }

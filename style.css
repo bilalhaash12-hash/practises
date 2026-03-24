@@ -27,11 +27,7 @@ h1{
 }
 .Task-container a:hover{
     background-color: #465704;
-    transform: translateY(-5px);   
-    
-}
-.link{
-    text-decoration: none;
+    transform: translateY(-5px);    
 }
 .Task2-container{
     display: flex;
@@ -53,6 +49,8 @@ h1{
 }
 .Task2-container a:hover{
     background-color: #465704;
-    transform: translateY(-5px);   
-    
+    transform: translateY(-5px);      
+}
+.link{
+    text-decoration: none;
 }
