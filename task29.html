@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid black;
+}
+.logo {
+  font-size: 28px;
+  font-family: 'Bebas Neue', sans-serif;
+}
+.logout-btn {
+  background: #020833;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+}
+.admin-container { display: flex; }
+
+.sidebar {
+  width: 200px;
+  background: white;
+  padding: 20px;
+}
+.menu {
+  padding: 10px;
+  background: #020833;
+  color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+.menu.active { background: #333; }
+
+.content { flex: 1; padding: 20px; }
+
+.section { display: none; }
+.section.active { display: block; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+}
+.card {
+  background: #020833;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+th { background: #020833; color: white; }
+
+</style>
+</head>
+
+<body>
+
+<header class="container">
+  <div class="logo">Premium Stay</div>
+  <button class="logout-btn" onclick="logout()">LOGOUT</button>
+</header>
+
+<div class="admin-container">
+
+<div class="sidebar">
+  <div class="menu active" onclick="showSection('dashboard', this)">DASHBOARD</div>
+  <div class="menu" onclick="showSection('hotels', this)">HOTELS</div>
+  <div class="menu" onclick="showSection('enquiries', this)">ENQUIRIES</div>
+  <div class="menu" onclick="showSection('reviews', this)">REVIEWS</div>
+  <div class="menu" onclick="showSection('maintenance', this)">MAINTENANCE</div>
+</div>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="section active">
+
+<div class="cards">
+  <div class="card">
+    <h3 id="totalBookings">0</h3>
+    <p>Total Bookings</p>
+  </div>
+
+  <div class="card">
+    <h3 id="totalRevenue">₹0</h3>
+    <p>Total Revenue</p>
+  </div>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Hotel</th>
+  <th>Price</th>
+  <th>Action</th>
+</tr>
+</thead>
+<tbody id="bookingList"></tbody>
+</table>
+</section>
+
+<!-- HOTELS -->
+<section id="hotels" class="section">
+
+<table>
+<thead>
+<tr>
+  <th>Hotel</th>
+  <th>Manager</th>
+  <th>Email</th>
+  <th>Phone</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody id="hotelList"></tbody>
+</table>
+</section>
+
+<section id="enquiries" class="section">
+  <h2>Enquiries</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="enquiryList"></tbody>
+  </table>
+</section>
+
+<section id="reviews" class="section">
+  <h2>Customer Reviews</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Review</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody id="reviewList"></tbody>
+  </table>
+</section>
+
+<section id="maintenance" class="section">
+  <h2>Maintenance Requests</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Hotel</th>
+        <th>Issue</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="maintenanceList"></tbody>
+  </table>
+</section>
+
+</div>
+</div>
+
+<script>
+
+// 🔐 TEMP disable redirect for testing
+// if(localStorage.getItem("isLoggedIn") !== "true"){
+//   window.location.href = "login.html";
+// }
+
+// DEMO BOOKINGS
+if(!localStorage.getItem("bookings")){
+  const demo = [
+    {name:"Ali", hotel:"Sea View", price:2000},
+    {name:"Rahul", hotel:"Grand Hotel", price:3500}
+  ];
+  localStorage.setItem("bookings", JSON.stringify(demo));
+}
+
+let bookings = JSON.parse(localStorage.getItem("bookings"));
+const bookingTable = document.getElementById("bookingList");
+
+function loadBookings(){
+  bookingTable.innerHTML = "";
+  let total = 0;
+
+  bookings.forEach((b, i)=>{
+    total += b.price;
+
+    bookingTable.innerHTML += `
+      <tr>
+        <td>${b.name}</td>
+        <td>${b.hotel}</td>
+        <td>₹${b.price}</td>
+        <td><button onclick="deleteBooking(${i})">Delete</button></td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("totalBookings").innerText = bookings.length;
+  document.getElementById("totalRevenue").innerText = "₹" + total;
+}
+
+function deleteBooking(i){
+  bookings.splice(i,1);
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+  loadBookings();
+}
+
+// HOTELS
+if(!localStorage.getItem("hotels")){
+  const hotels = [
+    {hotel:"Taj", manager:"Abbu", email:"abbu@gmail.com", phone:"123456", status:"Active"},
+    {hotel:"Palace", manager:"Siraj", email:"siraj@gmail.com", phone:"999999", status:"Active"}
+  ];
+  localStorage.setItem("hotels", JSON.stringify(hotels));
+}
+
+function loadHotels(){
+  const hotels = JSON.parse(localStorage.getItem("hotels"));
+  const table = document.getElementById("hotelList");
+  table.innerHTML = "";
+
+  hotels.forEach(h=>{
+    table.innerHTML += `
+      <tr>
+        <td>${h.hotel}</td>
+        <td>${h.manager}</td>
+        <td>${h.email}</td>
+        <td>${h.phone}</td>
+        <td>${h.status}</td>
+      </tr>
+    `;
+  });
+}
+
+// SWITCH
+function showSection(id, el){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".menu").forEach(m=>m.classList.remove("active"));
+  el.classList.add("active");
+}
+
+// Enquiries
+if(!localStorage.getItem("enquiries")){
+  const data = [
+    {name:"Ali", msg:"Need room booking"},
+    {name:"Rahul", msg:"Check availability"}
+  ];
+  localStorage.setItem("enquiries", JSON.stringify(data));
+}
+
+// Reviews
+if(!localStorage.getItem("reviews")){
+  const data = [
+    {user:"Aisha", review:"Good stay", rating:4},
+    {user:"John", review:"Excellent", rating:5}
+  ];
+  localStorage.setItem("reviews", JSON.stringify(data));
+}
+
+// Maintenance
+if(!localStorage.getItem("maintenance")){
+  const data = [
+    {hotel:"Taj", issue:"AC not working", status:"Pending"},
+    {hotel:"Palace", issue:"Water leak", status:"Pending"}
+  ];
+  localStorage.setItem("maintenance", JSON.stringify(data));
+}
+
+function loadEnquiries(){
+  const data = JSON.parse(localStorage.getItem("enquiries"));
+  const table = document.getElementById("enquiryList");
+  table.innerHTML = "";
+
+  data.forEach((e,i)=>{
+    table.innerHTML += `
+      <tr>
+        <td>${e.name}</td>
+        <td>${e.msg}</td>
+        <td><button onclick="deleteEnquiry(${i})">Delete</button></td>
+      </tr>
+    `;
+  });
+}
+
+function deleteEnquiry(i){
+  let data = JSON.parse(localStorage.getItem("enquiries"));
+  data.splice(i,1);
+  localStorage.setItem("enquiries", JSON.stringify(data));
+  loadEnquiries();
+}
+function loadReviews(){
+  const data = JSON.parse(localStorage.getItem("reviews"));
+  const table = document.getElementById("reviewList");
+  table.innerHTML = "";
+
+  data.forEach(r=>{
+    table.innerHTML += `
+      <tr>
+        <td>${r.user}</td>
+        <td>${r.review}</td>
+        <td>${r.rating}⭐</td>
+      </tr>
+    `;
+  });
+}
+
+function loadMaintenance(){
+  const data = JSON.parse(localStorage.getItem("maintenance"));
+  const table = document.getElementById("maintenanceList");
+  table.innerHTML = "";
+
+  data.forEach((m,i)=>{
+    table.innerHTML += `
+      <tr>
+        <td>${m.hotel}</td>
+        <td>${m.issue}</td>
+        <td>${m.status}</td>
+        <td>
+          <button onclick="fix(${i})">Mark Fixed</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function fix(i){
+  let data = JSON.parse(localStorage.getItem("maintenance"));
+  data[i].status = "Fixed";
+  localStorage.setItem("maintenance", JSON.stringify(data));
+  loadMaintenance();
+}
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("isLoggedIn");
+  alert("Logged out");
+}
+
+loadBookings();
+loadHotels();
+loadEnquiries();
+loadReviews();
+loadMaintenance();
+
+</script>
+
+</body>
+</html>
